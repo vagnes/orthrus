@@ -1,0 +1,19 @@
+// Routine B: Mouse jiggler
+// Mouse axes: +X, +Y
+
+// VAR: maggor, 2
+// VAR: sleggar, 3
+// 
+// LOOP: {{maggor}}
+//     SER: This should be printed twice
+//     LOOP: {{sleggar}}
+//         SER: This should be printed six times
+//     ELOOP
+// ELOOP
+
+// VAR: x, 10
+// VAR: Y, 10
+// 
+// M[move]: X(-{{x}}), Y(-{{Y}})
+// SLEEP 0.3
+// M[move]: X({{x}}), Y({{Y}})

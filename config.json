@@ -1,0 +1,8 @@
+{
+  "automatic": false,
+  "default_script": "routines/automatic.osl",
+  "clear": false,
+  "logging": true,
+  "prewait": 0,
+  "vars": []
+}
