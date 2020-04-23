@@ -44,10 +44,10 @@ def ext_payload(payload):
 def comment_or_empty(line):
 
     if (line == ""
-            or line.startswith("\n")
-            or line.startswith("\r\n")
-            or line.startswith("//")
-        ):
+                or line.startswith("\n")
+                or line.startswith("\r\n")
+                or line.startswith("//")
+            ):
         return True
 
 
@@ -157,10 +157,13 @@ def code_runner(current_code):
             print(f"{i} | {line}")
         if is_loop(line):
             count = sanitise(line, "LOOP:", True)
-            arg = argument(line)
-            if arg == "inf": #TODO: turn into [arg]
-                while(True):
-                    code_runner(current_code[i+1:])
+            try:
+                arg = argument(line)
+                if arg == "inf":
+                    while(True):
+                        code_runner(current_code[i+1:])
+            except AttributeError:
+                pass # no argument, hence no inf loop
 
             rest = None
             for _ in range(int(count)):
