@@ -4,7 +4,7 @@ import os
 import sys
 import time
 from digitalio import DigitalInOut, Direction, Pull
-from parser import *
+from parser import Executor
 from config import *
 
 # Internal neopixel
@@ -28,7 +28,7 @@ def open_routine(routine):
     print(f"> {routine} executing", end="\n")
     dot.fill((150, 150, 0))
     dot.show()
-    execute_routine(routine)
+    Executor(routine).execute_routine()
     print("> Completed.")
     time.sleep(1)
 
@@ -81,6 +81,8 @@ DONE:
 * Recursive looping / loop within loop
 * Variables (VAR:)
 * Additional mouse commands args (click)
+* Call OSL files within OSL
+* OOP instead of container cleanup
 """
 
 """

