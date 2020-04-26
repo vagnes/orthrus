@@ -64,10 +64,9 @@ while True:
 
 """
 DO:
-* External storage exfiltration
+* External storage exfiltration (done, but formalise)
 * Neopixel control
-* Unix storage exfiltration
-* Additional mouse commands args (click)
+* Unix storage exfiltration (done, but formalise)
 """
 
 """
@@ -81,6 +80,7 @@ DONE:
 * Empty line error PARTLY DONE, CRLF shit
 * Recursive looping / loop within loop
 * Variables (VAR:)
+* Additional mouse commands args (click)
 """
 
 """
