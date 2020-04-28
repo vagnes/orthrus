@@ -93,4 +93,5 @@ DEFER:
 * Multiline strings (MS:)
 * Duckyscript -> OSL
 * Joystick support
+* Add counter
 """
