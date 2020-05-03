@@ -6,20 +6,24 @@ Orthrus is a HID/keystroke injection device written in CircuitPython, primarily 
 
 Scripts are written in OSL (Orthrus Scripting Language) and the following commands are currently available:
 
-| Command                           | Description                                            |
+| \\textbf\{Command\}               | \\textbf\{Description\}                                |
 |-----------------------------------|--------------------------------------------------------|
 | K: \<KEYCODE>                      | Keycode command                                        |
-| SLEEP: \<FLOAT>                    | Sleeps for n seconds until executing next line         |
 | C: \<CCC>                          | Consumer control code command                          |
 | S: \<STRING>                       | HID injects string                                     |
 | SL: \<STRING>                      | HID injects string and presses ENTER                   |
-| M\[move\]: X\(\<INT>\), Y\(\<INT>\) | Moves the mouse \(X, Y coordinates\)                   |
-| M\[click\]                        | Clicks the mouse \(right or left mouse button\)        |
-| EP:                               | Injects external payload                               |
-| SER: \<STRING>                             | Print to serial console                                |
-| QUIT                              | Quits the routine/script                               |
 | LOOP: \<INT>                       | Demarcates the beginning of the loop and loops n times |
 | ELOOP                             | Demarcates the end of the loop                         |
+| VAR: \<NAME>, \<VALUE>              | Sets variable                                          |
+| \{\{\<VAR NAME>\}\}                | Use variable                                           |
+| OSL:  \<PATH \(as string\)>        | Run  external OSL fragments within an OSL script       |
+| M\[move\]: X\(\<INT>\), Y\(\<INT>\) | Moves the mouse \(X, Y coordinates\)                   |
+| M\[click\]                        | Clicks the mouse \(right or left mouse button\)        |
+| EP:  \<PATH \(as string\)>         | Injects external payload                               |
+| SLEEP: \<FLOAT>                    | Sleeps for n seconds until executing next line         |
+| SER: \<STRING>                     | Print string to serial console                         |
+| QUIT                              | Quits the routine/script                               |
+
 
 ## Installation
 
