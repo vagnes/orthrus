@@ -6,7 +6,7 @@ Orthrus is a HID/keystroke injection device written in CircuitPython, primarily 
 
 Scripts are written in OSL (Orthrus Scripting Language) and the following commands are currently available:
 
-| \\textbf\{Command\}               | \\textbf\{Description\}                                |
+| Command                           | Description                                            |
 |-----------------------------------|--------------------------------------------------------|
 | K: \<KEYCODE>                      | Keycode command                                        |
 | C: \<CCC>                          | Consumer control code command                          |
