@@ -61,37 +61,3 @@ while True:
 
     if config()["clear"]:
         print("")
-
-"""
-DO:
-* External storage exfiltration (done, but formalise)
-* Neopixel control
-* Unix storage exfiltration (done, but formalise)
-"""
-
-"""
-DONE:
-* External payload (EP:)
-* OSL to serial (SER:)
-* Refactor and separate parser
-* JSON config
-* Automatic OSL script
-* Looping (ind. & set int)
-* Empty line error PARTLY DONE, CRLF shit
-* Recursive looping / loop within loop
-* Variables (VAR:)
-* Additional mouse commands args (click)
-* Call OSL files within OSL
-* OOP instead of container cleanup
-"""
-
-"""
-DEFER:
-* Automatic obfuscation (Missing zlib; EP should be pre-obfuscated anyway)
-* OLED screen control
-* Wifi enabled control
-* Multiline strings (MS:)
-* Duckyscript -> OSL
-* Joystick support
-* Add counter
-"""
