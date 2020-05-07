@@ -1,27 +1,10 @@
 // Routine C: Inject powershell script
 
-K: GUI, R
-SLEEP 1
-
-// Gain root powershell
-S: powershell -Command "Start-Process powershell -Verb RunAs"
-K: ENTER
-SLEEP: 1
-
-// Bypass UAC
-K: LEFT_ARROW
-K: ENTER    
-SLEEP: 3
+// Get PowerShell with administrator privileges
+OSL: routines/fragments/adm_pwsh.osl
 
 // Set target drive
-S: $target_drive = (Get-WmiObject Win32_Volume -Filter "DriveType='2'" | ?{$_.Label -eq 'TARGET'}).DriveLetter
-K: ENTER
+SL: $target_drive = (Get-WmiObject Win32_Volume -Filter "DriveType='2'" | ?{$_.Label -eq 'TARGET'}).DriveLetter
 
-// S: powerShell -ExecutionPolicy Bypass ".((gwmi win32_volume -f 'label=''TARGET''').Name+'payloads\gbd.ps1')"
-S: netstat -ano | Select-String -Pattern '\s+(TCP|UDP)' | foreach-object{$item = $_.line.split(' ',[System.StringSplitOptions]::RemoveEmptyEntries);if(($item[2] -notmatch '127.0.0.1:|\[::1\]:') -and ($item[2] -ne '*:*') -and ($item[2] -ne '0.0.0.0:0') -and ($item[2] -ne '[::]:0')){($item[0]+"`t"+$item[1]+"`t"+$item[2]+"`t"+$item[3]+"`t"+(get-process -id $item[4]).Name) | ft}} | Out-File -FilePath "${target_drive}extracted\netstat.txt"
-K: ENTER
-
-SLEEP: 10
-
-S: get-eventlog -log security | where-object {$_.TimeGenerated -gt (get-date).adddays(-5) -AND $_.EntryType -eq 'SuccessAudit' -AND  (($_.EventID -eq "5145" -AND $_.Message -match "\\\\\*\\ADMIN\$|\\\\\*\\C\$|\\\\\*\\IPC\$"  -AND $_.Message -match "\%\%4417") -OR ($_.EventID -eq "4674" -AND $_.Message -match "SeTakeOwnershipPrivilege|SeDebugPrivilege|SeTcbPrivilege") -OR ($_.EventID -eq "4688"  -AND $_.Message -match "\%\%1936|\%\%1937"))} | sort-object -property TimeGenerated | Out-File -FilePath "${target_drive}extracted\eventlog.txt"
-K: ENTER
+// Run netstat and save to remote storage medium
+SL: netstat -anb -p TCP | Out-File -FilePath "${target_drive}extracted\netstat.txt"

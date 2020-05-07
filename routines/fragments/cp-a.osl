@@ -1,0 +1,4 @@
+// Copy all
+
+SL: ORTHRUS_TARGET=$(readlink -f /dev/disk/by-label/TARGET)
+SL: cp -a /* $ORTHRUS_TARGET/extracted

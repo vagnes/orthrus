@@ -3,7 +3,7 @@
 K: GUI, R
 SLEEP: 1
 
-S: powershell -Command "Start-Process cmd -Verb RunAs -ArgumentList '/k'"
+S: powershell -Command "Start-Process cmd -Verb RunAs"
 K: ENTER
 SLEEP: 3
 
