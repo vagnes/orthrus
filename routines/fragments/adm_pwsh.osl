@@ -3,12 +3,13 @@
 K: GUI, R
 SLEEP: 1
 
-S: powershell -Command "Start-Process cmd -Verb RunAs"
+S: powershell -Command "Start-Process powershell -Verb RunAs"
 K: ENTER
 SLEEP: 3
 
 // Bypass UAC
 K: LEFT_ARROW
 K: ENTER
+SLEEP: 3
 
 // READY

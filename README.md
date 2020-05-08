@@ -1,8 +1,8 @@
 # Orthrus
 
-![Orthrus logo](./img/logo_black.png)
+<img src="./img/logo_black.png" alt="Orthrus logo" width="200" />
 
-Orthrus is a HID/keystroke injection device written in CircuitPython, primarily for the Adafruit M4 Airlift.
+Orthrus is a HID/keystroke injection device written in CircuitPython, primarily for the Adafruit M4 Airlift Lite.
 
 Scripts are written in OSL (Orthrus Scripting Language) and the following commands are currently available:
 
@@ -24,20 +24,29 @@ Scripts are written in OSL (Orthrus Scripting Language) and the following comman
 | SER: \<STRING>                      | Print string to serial console                         |
 | QUIT                                | Quits the routine/script                               |
 
+Please see examples in the "routines" folder.
+
 ## Installation
+
+Simply clone this repository to your Adafruit Metro M4 Airlift Lite and make sure you have the required libraries installed.
+
+### Required libraries
+
+* Adafruit HID
+* Neopixel
+* Simpleio
 
 ## Running
 
-## Required libraries
+The software should start automatically.
 
-## Acknowledgements
+The current configuration is three buttons (at digital pins 2, 3 and 4) which corresponds to routine_a.osl, routine_b.osl and routine_c.osl respectively.
 
 ## Todo and planned features
 
-- Automatic obfuscation (Missing zlib; EP should be pre-obfuscated anyway)
-- OLED screen control
-- Wifi enabled control
-- Duckyscript -> OSL
-- Joystick support
-- Add counter
-- Neopixel control
+* OLED screen control
+* Wifi enabled control
+* Duckyscript -> OSL
+* Joystick/gamepad support
+* Add counter in OSL
+* Neopixel control with OSL

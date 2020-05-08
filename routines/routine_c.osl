@@ -1,4 +1,4 @@
-// Routine C: Inject powershell script
+// Routine C: Netstat output to remote storage
 
 // Get PowerShell with administrator privileges
 OSL: routines/fragments/adm_pwsh.osl

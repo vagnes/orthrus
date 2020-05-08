@@ -1,10 +1,3 @@
 // Routine A: Gain root powershell
 
-LOOP[inf]
-    SL: ls -la
-    SLEEP: 1
-    LOOP: 2
-        SL: whoami
-    ELOOP
-    SLEEP: 3
-ELOOP
+OSL: routines/fragments/adm_pwsh.osl

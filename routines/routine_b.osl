@@ -1,15 +1,9 @@
 // Routine B: Mouse jiggler
 // Mouse axes: +X, +Y
 
-VAR: to_print, maggorsleggar
+VAR: x, 10
+VAR: Y, 10
 
-OSL: routines/fragments/uac_bypass.osl
-
-SER: {{to_print}}
-
-// VAR: x, 10
-// VAR: Y, 10
-// 
-// M[move]: X(-{{x}}), Y(-{{Y}})
-// SLEEP 0.3
-// M[move]: X({{x}}), Y({{Y}})
+M[move]: X(-{{x}}), Y(-{{Y}})
+SLEEP 0.3
+M[move]: X({{x}}), Y({{Y}})

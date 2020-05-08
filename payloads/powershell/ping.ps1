@@ -1,1 +1,2 @@
-ping qore.no
+# Ping example
+ping vagn.es
