@@ -50,3 +50,7 @@ The current configuration is three buttons (at digital pins 2, 3 and 4) which co
 * Joystick/gamepad support
 * Add counter in OSL
 * Neopixel control with OSL
+
+## Acknowledgements
+
+The logo was made by [Johannes T. Røsvik](https://github.com/rosvik/)
