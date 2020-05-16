@@ -44,12 +44,13 @@ The current configuration is three buttons (at digital pins 2, 3 and 4) which co
 
 ## Todo and planned features
 
-* OLED screen control
-* Wifi enabled control
+* Support for more CircuitPython devices
 * Duckyscript -> OSL
 * Joystick/gamepad support
 * Add counter in OSL
 * Neopixel control with OSL
+* OLED screen control
+* Wifi enabled control
 
 ## Acknowledgements
 
