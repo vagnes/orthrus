@@ -40,16 +40,17 @@ Simply clone this repository to your Adafruit Metro M4 Airlift Lite and make sur
 
 The software should start automatically.
 
-The current configuration is three buttons (at digital pins 2, 3 and 4) which corresponds to routine_a.osl, routine_b.osl and routine_c.osl respectively.
+The current configuration is three buttons (at digital pins 2, 3 and 4) which corresponds to routine_a.osl, routine_b.osl and routine_c.osl respectively. In the `config.json` file, you can set `"automatic": true,` which will run the `automatic.osl` script after a few seconds.
 
 ## Todo and planned features
 
-* OLED screen control
-* Wifi enabled control
+* Support for more CircuitPython devices
 * Duckyscript -> OSL
 * Joystick/gamepad support
 * Add counter in OSL
 * Neopixel control with OSL
+* OLED screen control
+* Wifi enabled control
 
 ## Acknowledgements
 
