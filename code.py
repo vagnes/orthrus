@@ -33,7 +33,7 @@ def open_routine(routine):
     time.sleep(1)
 
 
-prewait = config()["prewait"]
+prewait = config["prewait"]
 
 if prewait:
     print(f"\nWaiting {prewait} second(s).")
@@ -45,9 +45,9 @@ while True:
     dot.fill((0, 255, 0))
     dot.show()
 
-    if config()["automatic"]:
+    if config["automatic"]:
         time.sleep(2)
-        open_routine(config()["default_script"])
+        open_routine(config["default_script"])
         sys.exit()
 
     if not buttons[0].value:
@@ -59,5 +59,5 @@ while True:
     if not buttons[2].value:
         open_routine("routines/routine_c.osl")
 
-    if config()["clear"]:
+    if config["clear"]:
         print("")

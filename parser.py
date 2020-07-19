@@ -144,7 +144,7 @@ def code_runner(current_code):
     if not current_code:
         return  # if not empty
     for i, line in enumerate(current_code):
-        if config()["logging"]:
+        if config["logging"]:
             print(f"{i} | {line}")
         if is_loop(line):
             count = sanitise(line, "LOOP:", True)
