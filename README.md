@@ -37,9 +37,13 @@ Please see examples in the "routines" folder.
 ## Gamepad example buttons scheme (Xbox One)
 
 ABXY: 1,2,3,4
+
 LSB, RSB, LT(float), RT(float): 5,6,7,8
+
 BACK, START: 9,10
+
 LSC, RSC: 11,12
+
 D-Pad, NSEW: 13,14,15,16
 
 ## Installation
