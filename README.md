@@ -22,7 +22,7 @@ Scripts are written in OSL (Orthrus Scripting Language) and the following comman
 | G\[press\]: \<INT>                       | Press and release a gamepad button (1-16)              |
 | G\[hold\]: \<INT>                        | Press and hold a gamepad button (1-16)                 |
 | G\[release\]: \<INT>                     | Release a gamepad button (1-16)                        |
-| G\[release_all\]                         | Press all gamepad buttons                              |
+| G\[release_all\]                         | Release all gamepad buttons                            |
 | G\[center\]                              | Centre all joysticks                                   |
 | G\[joy_left\]: X\(\<INT>\), Y\(\<INT>\)  | Move left joystick to absolute position (+/- 127)      |
 | G\[joy_right\]: X\(\<INT>\), Y\(\<INT>\) | Move left joystick to absolute position (+/- 127)      |
