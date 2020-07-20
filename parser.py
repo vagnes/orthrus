@@ -10,12 +10,14 @@ from adafruit_hid.consumer_control_code import ConsumerControlCode
 from adafruit_hid.mouse import Mouse
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.keyboard import Keyboard
+from adafruit_hid.gamepad import Gamepad
 
 # Init HIDs
 kbd = Keyboard(usb_hid.devices)
 layout = KeyboardLayoutUS(kbd)
 cc = ConsumerControl(usb_hid.devices)
 m = Mouse(usb_hid.devices)
+g = Gamepad(usb_hid.devices)
 
 
 def sanitise(line, cmd, remove_space=False):
@@ -51,6 +53,11 @@ def is_var(line):
     if line.startswith("VAR", 0):
         line = sanitise(line, "VAR: ")
         return True
+
+def xy_coordinates(line):
+    cord = re.search(r"X\((.*?)\).*?Y\((.*?)\)", line.upper())
+    cord = [int(float(cord.group(1))), int(float(cord.group(2)))]
+    return cord
 
 
 def parser(line):
@@ -102,8 +109,7 @@ def parser(line):
         arg = argument(line)
 
         if arg == "move":
-            cord = re.search(r"X\((.*?)\).*?Y\((.*?)\)", line.upper())
-            cord = [int(float(cord.group(1))), int(float(cord.group(2)))]
+            cord = xy_coordinates(line)
             m.move(*cord)
 
         if arg == "click":  # TODO: Test
@@ -112,6 +118,52 @@ def parser(line):
                 m.click(Mouse.LEFT_BUTTON)
             elif line.lower() == "right":
                 m.click(Mouse.RIGHT_BUTTON)
+
+    # Gamepad commands: MUST have an argument
+    elif line.startswith("G", 0):
+        arg = argument(line)
+
+        # Buttons
+
+        # ABXY: 0,1,2,3
+        # LSB, RSB, LT(float), RT(float): 4,5,6,7
+        # BACK, START: 8,9
+        # LSC, RSC: 10,11
+        # D-Pad, NSEW: 12,13,14,15
+
+
+        if arg == "press":
+            line = sanitise(line, "G[press]:", True)
+            g.click_buttons(int(line))
+
+        if arg == "hold":
+            line = sanitise(line, "G[hold]:", True)
+            g.press_buttons(int(line))
+
+        if arg == "release":
+            line = sanitise(line, "G[release]:", True)
+            g.release_buttons(int(line))
+        
+        if arg == "release_all":
+            g.release_all_buttons()
+
+        # Joystick
+        
+        if arg == "center":
+            g.move_joysticks(0, 0, 0, 0)
+
+        if arg == "joy_left":
+            cord = xy_coordinates(line)
+            g.move_joysticks(*cord)
+        
+        if arg == "joy_right":
+            cord = xy_coordinates(line)
+            g.move_joysticks(0, 0, *cord)
+
+        # General 
+
+        if arg == "reset":
+            g.reset_all()
 
     # Inject external payload
     elif line.startswith("EP:", 0):

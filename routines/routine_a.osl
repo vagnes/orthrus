@@ -1,3 +1,12 @@
-// Routine A: Gain root powershell
+// Routine A: Test gamepad functionality
 
-OSL: routines/fragments/adm_pwsh.osl
+LOOP: 5
+    G[hold]: 5
+    SLEEP: 1
+    G[release_all]
+    G[joy_left]: X(127), Y(-127)
+    SLEEP: 1
+    G[joy_right]: X(-127), Y(127)
+    SLEEP: 2
+    G[reset]
+ELOOP
